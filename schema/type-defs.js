@@ -2,12 +2,27 @@ const{gql}=require("apollo-server");
 
 const typeDefs = gql`
     type User{
-        id:String!
+        id:ID!
         name: String!
-        age:Int!
-        heigth:Float!
+        email:String!
+        password: String!
+        favoritePicture:[Picture]
+         
+    }
+
+    type Picture{
+        id: ID!  
+        name: String!
+        url: String!
 
     }
     type Query{
-        users: User
-`
+        users: [User!]!
+        user(id: ID!):User!
+        pictures:[Picture!]!
+        picture(name: String!): Picture!
+    }
+
+`;
+
+module.exports = {typeDefs }
