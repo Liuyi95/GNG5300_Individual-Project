@@ -1,0 +1,25 @@
+{
+  "name": "gng5300_individual-project",
+  "version": "1.0.0",
+  "description": "Individual Project (Photo sharing website)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liuyi95/GNG5300_Individual-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liuyi95/GNG5300_Individual-Project/issues"
+  },
+  "homepage": "https://github.com/Liuyi95/GNG5300_Individual-Project#readme",
+  "dependencies": {
+    "apollo-server": "^3.11.1",
+    "graphql": "^16.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
