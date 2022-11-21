@@ -23,6 +23,17 @@ const typeDefs = gql`
         picture(name: String!): Picture!
     }
 
+    input CreateUserInput{
+        id:ID!
+        name: String!
+        email:String!
+        password: String!
+    }
+
+    type Mutation{
+        createUser(input: CreateUserInput!): User
+    }
+
 `;
 
 module.exports = {typeDefs }

@@ -26,6 +26,12 @@ const resolvers={
     User:{
         favoritePicture: () =>{
             return PictureList
+        },
+    },
+    Mutation:{
+        createUser:(parent, args) => {
+            const user =args.input;
+            console.log(user);
         }
     }
 }
