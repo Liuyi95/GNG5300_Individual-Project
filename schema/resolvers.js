@@ -31,8 +31,31 @@ const resolvers={
     Mutation:{
         createUser:(parent, args) => {
             const user =args.input;
-            console.log(user);
-        }
+            // console.log(user);
+            const lastId = UserList[UserList.length-1].id;
+            user.id=lastId+1;
+            UserList.push(user);
+            return user;
+        },
+
+        updateUsername:(parent, args) => {
+            const {id, newUsername}=args.input;
+            let userUpdate;
+            UserList.forEach((user)=>{
+                if (user.id === Number(id)){
+                    user.name = newUsername;
+                    userUpdate = user;
+                }
+            }
+            );
+            return userUpdate;
+        },
+
+        deleteUser: (parent, args) => {
+            const id=args.id;
+            _.remove(UserList,(user) => user.id === Number(id));
+            return null;
+        },
     }
 }
 
