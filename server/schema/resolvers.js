@@ -37,6 +37,8 @@ const resolvers={
             user.id=lastId+1;
             UserList.push(user);
             return user;
+
+            // const res = await createUser.save();
         },
 
         updateUsername:(parent, args) => {

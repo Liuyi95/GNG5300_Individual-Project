@@ -1,3 +1,6 @@
+// const {UserList}=require('mongoose');
+// const {PictureList}=require('mongoose');
+
 const UserList=[
     {
         id:1,
