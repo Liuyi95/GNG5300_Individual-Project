@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "start:dev": "babel-node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,20 @@
   },
   "homepage": "https://github.com/Liuyi95/GNG5300_Individual-Project#readme",
   "dependencies": {
+    "apollo-datasource-mongodb": "^0.5.4",
     "apollo-server": "^3.11.1",
+    "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "lodash": "^4.17.21",
     "mongoose": "^6.7.3",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2"
   },
-  "devDependencies": {},
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.20.2",
+    "@babel/node": "^7.20.2",
+    "@babel/preset-env": "^7.20.2"
+  }
 }
