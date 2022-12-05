@@ -8,10 +8,10 @@ const resolvers={
         users: async(_, _args, { dataSources: { users } }) => {
             return users.getUsers();
         },
-        user:async (_, { id }, { dataSources: { users } })=>{
+        user:async (_, { email }, { dataSources: { users } })=>{
             // const id=args.id;
             // const user=_.find(UserList, {id: Number(id)});
-            return users.getUser(id);
+            return users.getUser(email);
         },
         //PICTURE
         // pictures:()=>{
@@ -31,7 +31,8 @@ const resolvers={
     },
     Mutation:{
         createUser: async (_, args, { dataSources: { users } }) => {
-            return users.createMovie(args)
+            console.log(args)
+            return users.createUser(args)
           },
         // createUser:(parent, args) => {
         //     const user =args.input;
