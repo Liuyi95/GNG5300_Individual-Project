@@ -1,6 +1,10 @@
 import './App.css';
 import {ApolloClient, InMemoryCache, ApolloProvider} from "@apollo/client";
 import DisplayData from './DisplayData';
+import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom';
+import NavBar from './NavBar'
+import SignInSide from './Login'
+import SignUpSide from './SignUp'
 
 function App() {
   const client =new ApolloClient({
@@ -9,12 +13,20 @@ function App() {
   });
   return (
     <ApolloProvider client={client}>
-      <div className="App">
-            <DisplayData />
-            successful
-      </div>
+    <BrowserRouter>
+      {/* <header>
+        <h1>Hello World</h1>
+      </header> */}
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<SignInSide />} />
+        <Route path="/signup" element={<SignUpSide />} />
+        {/* <Route path="about" element={<About/>} />
+        <Route path="contact" element={<Contact/>} />
+        <Route path="*" element={<Error/>} /> */}
+      </Routes>
+    </BrowserRouter>
     </ApolloProvider>
-    
   );
 }
 
