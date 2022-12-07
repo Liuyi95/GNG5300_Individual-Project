@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,11 +14,13 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useQuery, useLazyQuery, gql, useMutation }from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import './style.css'
 
 const GET_USER_BY_NAME=gql`
 query getUser($email: String!){
     user(email: $email) {
       name
+      email
       password
     }
   }
@@ -40,7 +42,36 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
-  const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME);
+  const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME,{
+    onCompleted: (data) => {
+      // console.log(data)
+      // console.log(userSearchData)
+    }
+  });
+  const [errorMessage, setErrorMessage] = useState('');
+  const [inputUser, setInputUser]=useState('');
+
+  React.useEffect(() => {
+    console.log(userSearchData)
+    console.log(inputUser)
+    if(!inputUser){
+      setErrorMessage('');
+    }else{
+      if(!inputUser.email||!inputUser.password){
+        setErrorMessage('Please input both your email and password!');
+      }else if(!userSearchData){
+        setErrorMessage('You do not have an account!');
+      }else if(userSearchData){
+        if(userSearchData.user.password!==inputUser.password){
+          setErrorMessage('Your password is incorrect!');
+        }else{
+          setErrorMessage('');
+          navigate('/Products')
+        }
+      }
+    }
+  }, [userSearchData, inputUser])
+  
   let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -49,14 +80,9 @@ export default function SignInSide() {
         email: data.get('email'),
         password: data.get('password'),
     }
-    console.log(inputUser);
-    fetchUser({variables:{email: data.get('email')}})
-    let allowLogin
-    if(userSearchData&&userSearchData.user.password===inputUser.password){
-        navigate('/Products')
-        allowLogin=true
-    }
-    console.log(userSearchData.user)
+    setInputUser(inputUser)
+    console.log(inputUser)
+    fetchUser({variables:{email: inputUser.email}})
   };
 
   return (
@@ -118,6 +144,9 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
+              {errorMessage && (
+                <p className="error"> {errorMessage} </p>
+              )}
               <Button
                 type="submit"
                 fullWidth

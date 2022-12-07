@@ -131,7 +131,6 @@ export default function SignUpSide() {
                 label="User Name"
                 name="name"
                 autoComplete="name"
-                autoFocus
               />
               <TextField
                 margin="normal"
