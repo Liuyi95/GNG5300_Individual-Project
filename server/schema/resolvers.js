@@ -10,6 +10,7 @@ const resolvers={
         user:async (_, { email }, { dataSources: { users } })=>{
             return users.getUser(email);
         },
+
         //PICTURE
         pictures:async(_, _args, { dataSources: { pictures } }) => {
             return pictures.getPictures();
@@ -18,6 +19,7 @@ const resolvers={
             return pictures.getPicture(name);
         },
     },
+
     User:{
         // favoritePicture: (parent) =>{
         //     console.log(parent);
