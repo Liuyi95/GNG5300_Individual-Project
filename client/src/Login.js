@@ -66,7 +66,7 @@ export default function SignInSide() {
           setErrorMessage('Your password is incorrect!');
         }else{
           setErrorMessage('');
-          navigate('/Products')
+          navigate('/Albums')
         }
       }
     }
@@ -157,7 +157,7 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
+                  <Link href="/Albums" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>

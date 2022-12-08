@@ -13,16 +13,18 @@ const resolvers={
             // const user=_.find(UserList, {id: Number(id)});
             return users.getUser(email);
         },
+
         //PICTURE
-        // pictures:()=>{
-        //     return PictureList;
-        // },
-        // picture:(parent, args)=>{
-        //     const name=args.name;
-        //     const picture=_.find(PictureList, {name});
-        //     return picture; 
-        // },
+        pictures: async(_, _args, { dataSources: { pictures } }) => {
+            return pictures.getPictures();
+        },
+        picture:async (_, { name }, { dataSources: { pictures } })=>{
+            // const id=args.id;
+            // const user=_.find(UserList, {id: Number(id)});
+            return pictures.getPicture(name);
+        },
     },
+
     User:{
         // favoritePicture: (parent) =>{
         //     console.log(parent);

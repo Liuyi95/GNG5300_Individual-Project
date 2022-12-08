@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from 'react-router-dom';
 
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Albums', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NavBar() {
@@ -48,21 +48,21 @@ function NavBar() {
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
-            variant="h6"
+            variant="h7"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
+              mr: 4,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
+              letterSpacing: '.03rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Visual Canada
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
