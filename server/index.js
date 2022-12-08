@@ -1,11 +1,14 @@
 import 'dotenv/config'
 import {User as UserModel} from './schema/models/user';
 import Users from './schema/dataSources/users';
+import { Picture as PictureModel } from './schema/models/picture';
+import Pictures from './schema/dataSources/pictures';
 const { ApolloServer } = require ("apollo-server");
-const{typeDefs}=require('./schema/type-defs');
+const{typeDefs}=require('./schema/type-defs');  
+
+
 const {resolvers} = require("./schema/resolvers");
 
-const MONGODB = "mongodb+srv://Liuyi:950601@apolloserversetup.ie88wcb.mongodb.net/?retryWrites=true&w=majority";
 const mongoose =require('mongoose');
 
 const uri = process.env.MONGODB_URI
@@ -20,6 +23,7 @@ const main = async () => {
 
   const dataSources = () => ({
     users: new Users(UserModel),
+    pictures: new Pictures(PictureModel)
   });
 
 const server = new ApolloServer({ typeDefs, resolvers, dataSources });

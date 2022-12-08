@@ -1,5 +1,4 @@
 
-const {UserList, PictureList}=require('../FakeData');
 const _=require("lodash")
 
 const resolvers={
@@ -9,19 +8,15 @@ const resolvers={
             return users.getUsers();
         },
         user:async (_, { email }, { dataSources: { users } })=>{
-            // const id=args.id;
-            // const user=_.find(UserList, {id: Number(id)});
             return users.getUser(email);
         },
         //PICTURE
-        // pictures:()=>{
-        //     return PictureList;
-        // },
-        // picture:(parent, args)=>{
-        //     const name=args.name;
-        //     const picture=_.find(PictureList, {name});
-        //     return picture; 
-        // },
+        pictures:async(_, _args, { dataSources: { pictures } }) => {
+            return pictures.getPictures();
+        },
+        picture:async (_, { name }, { dataSources: { pictures } })=>{
+            return pictures.getPicture(name);
+        },
     },
     User:{
         // favoritePicture: (parent) =>{
@@ -31,9 +26,11 @@ const resolvers={
     },
     Mutation:{
         createUser: async (_, args, { dataSources: { users } }) => {
-            console.log(args)
             return users.createUser(args)
-          },
+        },
+        createPicture: async (_, args, { dataSources: { pictures } }) => {
+            return pictures.createPicture(args)
+        },
         // createUser:(parent, args) => {
         //     const user =args.input;
         //     // console.log(user);
