@@ -1,44 +1,42 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-import { useQuery, useLazyQuery, gql, }from '@apollo/client';
+// import { gql, }from '@apollo/client';
 
 
-
-
-const QUERY_ALL_USERS=gql`
-    query Getuser{
-        users {
-            id
-            name
-            email
-            password
-            favoritePicture
+// const QUERY_ALL_USERS=gql`
+//     query Getuser{
+//         users {
+//             id
+//             name
+//             email
+//             password
+//             favoritePicture
             
-        }
-    }
-`;
+//         }
+//     }
+// `;
 
-const GET_USER_BY_NAME=gql`
-query getUser($email: String!){
-    user(email: $email) {
-      name
-      email
-      password
-      favoritePicture
-    }
-  }
-`;
+// const GET_USER_BY_NAME=gql`
+// query getUser($email: String!){
+//     user(email: $email) {
+//       name
+//       email
+//       password
+//       favoritePicture
+//     }
+//   }
+// `;
 export default function Deposits(props) {
 
-    const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME,{
-        onCompleted: (data) => {
-          // console.log(data)
-          // console.log(userSearchData)
-        }
-      });
+    // const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME,{
+    //     onCompleted: (data) => {
+    //       // console.log(data)
+    //       // console.log(userSearchData)
+    //     }
+    //   });
       console.log(props)
 
-    const{data, loading , error, refetch }=useQuery(QUERY_ALL_USERS);
+    // const{data, loading , error, refetch }=useQuery(QUERY_ALL_USERS);
   return (
     
     <React.Fragment>
