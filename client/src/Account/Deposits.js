@@ -1,27 +1,76 @@
 import * as React from 'react';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
-import Title from './Title';
+import { useQuery, useLazyQuery, gql, useMutation }from '@apollo/client';
 
 function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Deposits() {
+
+const QUERY_ALL_USERS=gql`
+    query Getuser{
+        users {
+            id
+            name
+            email
+            password
+            favoritePicture
+            
+        }
+    }
+`;
+
+const GET_USER_BY_NAME=gql`
+query getUser($email: String!){
+    user(email: $email) {
+      name
+      email
+      password
+      favoritePicture
+    }
+  }
+`;
+export default function Deposits(props) {
+
+    const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME,{
+        onCompleted: (data) => {
+          // console.log(data)
+          // console.log(userSearchData)
+        }
+      });
+      console.log(props)
+
+    const{data, loading , error, refetch }=useQuery(QUERY_ALL_USERS);
   return (
+    
     <React.Fragment>
-      <Title>Recent Deposits</Title>
-      <Typography component="p" variant="h4">
-        $3,024.00
+        <Typography component="p" variant="h4">
+        User Profile
       </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
-        on 15 March, 2019
+      <Typography component="p" variant="h5">
+        <div>Name: {props?.user?.name}</div>
+        <div>Email: {props?.user?.email}</div>
+        <div>FavoritePicture:{props?.user?.favoritePicture}</div>
+
+      {/* {data&& data.users.map((user)=>{
+                    return( 
+                        <div>
+                            <h6>Name: {user.name}</h6>  
+                            <h6>Email:{user.email}</h6>
+                        </div>
+                    );
+                })
+            } */}
+      </Typography>
+      {/* <Typography color="text.secondary" sx={{ flex: 1 }}>
+        Created on 11 December, 2022
       </Typography>
       <div>
         <Link color="primary" href="#" onClick={preventDefault}>
           View balance
         </Link>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 }

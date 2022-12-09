@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -18,9 +18,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-
 import Deposits from './Deposits';
-// import Orders from './Orders';
+import { useNavigate } from 'react-router-dom';
 
 
 const drawerWidth = 240;
@@ -73,6 +72,24 @@ const mdTheme = createTheme();
 
 function Account() {
   const [open, setOpen] = React.useState(true);
+  const [user, setUser] = useState()
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loggedInUser = sessionStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser)
+    }
+    if(!loggedInUser){
+      navigate('/')
+    }
+    // if (loggedInUser) {
+    //   const foundUser = JSON.parse(loggedInUser);
+    //   setUser(foundUser);
+    // }
+  }, []);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -101,19 +118,7 @@ function Account() {
           }}
         >
        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-           <Grid item xs={12} md={8} lg={9}>
-               <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                </Paper>
-          </Grid>
           {/* Recent Deposits */}
-    
           <Grid item xs={12} md={4} lg={3}>
              <Paper
                   sx={{
@@ -123,8 +128,7 @@ function Account() {
                     height: 240,
                   }}
                 >
-    
-                  <Deposits />
+                  <Deposits user={user} />
                 </Paper>
               </Grid>
 

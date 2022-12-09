@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useQuery, useLazyQuery, gql, useMutation }from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+
 import './style.css'
 
 const GET_USER_BY_NAME=gql`
@@ -25,6 +26,13 @@ query getUser($email: String!){
     }
   }
 `;
+
+// const bodyParser = require( 'body-parser');
+// const cookieParser = require('cookie-parser' ); 
+// const session = require('express-session');
+
+
+
 
 function Copyright(props) {
   return (
@@ -48,8 +56,17 @@ export default function SignInSide() {
       // console.log(userSearchData)
     }
   });
+
+
+
+  // const [cookies, setCookie] = useCookies(['user']);
+  // const userCookie = cookies['user'];
+
   const [errorMessage, setErrorMessage] = useState('');
   const [inputUser, setInputUser]=useState('');
+  // const [email, setEmail] = useState(userCookie && userCookie.email ? userCookie.email : "");
+  // const [password, setPassword] = useState(userCookie && userCookie.password ? userCookie.password : "");
+
 
   React.useEffect(() => {
     console.log(userSearchData)
@@ -66,6 +83,7 @@ export default function SignInSide() {
           setErrorMessage('Your password is incorrect!');
         }else{
           setErrorMessage('');
+          sessionStorage.setItem('user', JSON.stringify(userSearchData.user))
           navigate('/Albums')
         }
       }

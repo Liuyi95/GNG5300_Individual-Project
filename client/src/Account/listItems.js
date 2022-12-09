@@ -3,28 +3,29 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import Favorite from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 
 export const mainListItems = (
   <React.Fragment>
     <ListItemButton>
       <ListItemIcon>
-        <DashboardIcon />
+        <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText primary="Favorite" />
+      <ListItemText primary="Profile" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <ShoppingCartIcon />
+      <Favorite />
       </ListItemIcon>
-      <ListItemText primary="Orders" />
+      <ListItemText primary="Favorite" />
     </ListItemButton>
-    <ListItemButton>
+    {/* <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
@@ -41,22 +42,22 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
-    </ListItemButton>
+    </ListItemButton> */}
   </React.Fragment>
 );
 
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
-      Saved reports
+      Upload your Picture
     </ListSubheader>
     <ListItemButton>
       <ListItemIcon>
-        <AssignmentIcon />
+        <DriveFolderUploadIcon />
       </ListItemIcon>
-      <ListItemText primary="Current month" />
+      <ListItemText primary="Upload" />
     </ListItemButton>
-    <ListItemButton>
+    {/* <ListItemButton>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
@@ -67,6 +68,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
-    </ListItemButton>
+    </ListItemButton> */}
   </React.Fragment>
 );

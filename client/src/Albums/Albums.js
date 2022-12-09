@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './AlbumsHeader';
 import SearchPicture from './SearchPicture';
 import IconCheckboxes from './Heart'
+import { useNavigate } from 'react-router-dom';
 
 import { useQuery, useLazyQuery, gql, useMutation }from '@apollo/client';
 
@@ -40,7 +41,6 @@ function Copyright(props) {
     );
   }
   
-const cards1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const sections = [
   { title: 'Pictures', url: '#' },
   { title: 'Video', url: '#' },
@@ -56,8 +56,10 @@ const sections = [
 const theme = createTheme();
 
 export default function Albums() {
+  const [user, setUser] = useState()
   const{data:pictureData}=useQuery(QUERY_ALL_PICTURES);
   const [cards, setCards]=useState('');
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     console.log(pictureData)
@@ -65,6 +67,21 @@ export default function Albums() {
     pictureData&&setCards(pictureData.pictures)
     console.log(cards)
   }, [pictureData])
+
+  useEffect(() => {
+    const loggedInUser = sessionStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setUser(foundUser)
+    }
+    if(!loggedInUser){
+      navigate('/')
+    }
+    // if (loggedInUser) {
+    //   const foundUser = JSON.parse(loggedInUser);
+    //   setUser(foundUser);
+    // }
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

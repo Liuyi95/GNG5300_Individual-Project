@@ -7,7 +7,7 @@ import SignInSide from './Login';
 import SignUpSide from './SignUp';
 import HomePage from './Homepage/HomePage';
 import Albums from './Albums/Albums';
-import Account from './Account/Profile'
+import Account from './Account/Account'
 
 
 function App() {
