@@ -13,7 +13,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './AlbumsHeader';
 import SearchPicture from './SearchPicture';
 import IconCheckboxes from './Heart'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import { useQuery, gql, }from '@apollo/client';
 
@@ -54,31 +54,26 @@ const sections = [
 const theme = createTheme();
 
 export default function Albums() {
-  const [user, setUser] = useState()
+  // const [ setUser] = useState()
   const{data:pictureData}=useQuery(QUERY_ALL_PICTURES);
   const [cards, setCards]=useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   React.useEffect(() => {
     console.log(pictureData)
     console.log(pictureData?.pictures)
     pictureData&&setCards(pictureData.pictures)
-    console.log(cards)
   }, [pictureData])
 
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem("user");
     if (loggedInUser) {
-      const foundUser = JSON.parse(loggedInUser);
-      setUser(foundUser)
+      // const foundUser = JSON.parse(loggedInUser);
+      // setUser(foundUser)
     }
     if(!loggedInUser){
-      navigate('/')
+      // navigate('/')
     }
-    // if (loggedInUser) {
-    //   const foundUser = JSON.parse(loggedInUser);
-    //   setUser(foundUser);
-    // }
   }, []);
   return (
     <ThemeProvider theme={theme}>

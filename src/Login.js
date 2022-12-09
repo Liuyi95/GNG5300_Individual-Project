@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {  useLazyQuery, gql }from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import './style.css'
 
@@ -50,7 +50,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
-  const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME,{
+  const[fetchUser,{data:userSearchData,}]=useLazyQuery(GET_USER_BY_NAME,{
     onCompleted: (data) => {
       // console.log(data)
       // console.log(userSearchData)
@@ -84,13 +84,13 @@ export default function SignInSide() {
         }else{
           setErrorMessage('');
           sessionStorage.setItem('user', JSON.stringify(userSearchData.user))
-          navigate('/Albums')
+          // navigate('/Albums')
         }
       }
     }
   }, [userSearchData, inputUser])
   
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
