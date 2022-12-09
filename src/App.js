@@ -1,6 +1,5 @@
 import './App.css';
 import {ApolloClient, InMemoryCache, ApolloProvider} from "@apollo/client";
-import DisplayData from './DisplayData';
 import { BrowserRouter, NavLink, Routes, Route } from 'react-router-dom';
 import NavBar from './NavBar';
 import SignInSide from './Login';

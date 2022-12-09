@@ -1,9 +1,4 @@
-
-import { useState, useCallback } from "react";
-import { useQuery, useLazyQuery, gql, useMutation, throwServerError }from '@apollo/client';
-
-
-import * as React from 'react';
+import React, { useState } from "react";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,28 +9,30 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {  useLazyQuery, gql }from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
+
+import './style.css'
 
 const GET_USER_BY_NAME=gql`
 query getUser($email: String!){
     user(email: $email) {
       name
+      email
       password
     }
   }
 `;
-const CREATE_USER_MUTATION = gql`
-    mutation CreateUser($input:CreateUserInput!){
-        createUser(input:$input){
-        id
-        name
-        email
-        password
-        }
-    }
-`
+
+// const bodyParser = require( 'body-parser');
+// const cookieParser = require('cookie-parser' ); 
+// const session = require('express-session');
+
+
+
 
 function Copyright(props) {
   return (
@@ -52,30 +49,58 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUpSide() {
-  const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME);
-  const [createUser]= useMutation(CREATE_USER_MUTATION);
+export default function SignInSide() {
+  const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME,{
+    onCompleted: (data) => {
+      // console.log(data)
+      // console.log(userSearchData)
+    }
+  });
 
+
+
+  // const [cookies, setCookie] = useCookies(['user']);
+  // const userCookie = cookies['user'];
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const [inputUser, setInputUser]=useState('');
+  // const [email, setEmail] = useState(userCookie && userCookie.email ? userCookie.email : "");
+  // const [password, setPassword] = useState(userCookie && userCookie.password ? userCookie.password : "");
+
+
+  React.useEffect(() => {
+    console.log(userSearchData)
+    console.log(inputUser)
+    if(!inputUser){
+      setErrorMessage('');
+    }else{
+      if(!inputUser.email||!inputUser.password){
+        setErrorMessage('Please input both your email and password!');
+      }else if(!userSearchData){
+        setErrorMessage('You do not have an account!');
+      }else if(userSearchData){
+        if(userSearchData.user.password!==inputUser.password){
+          setErrorMessage('Your password is incorrect!');
+        }else{
+          setErrorMessage('');
+          sessionStorage.setItem('user', JSON.stringify(userSearchData.user))
+          navigate('/Albums')
+        }
+      }
+    }
+  }, [userSearchData, inputUser])
+  
+  let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const inputUser={
         email: data.get('email'),
-        name: data.get('name'),
         password: data.get('password'),
     }
-    fetchUser({variables:{email: inputUser.email}})
-    if(userSearchData){
-        console.log('this is an error')
-        throwServerError('User is error already exist')
-    }else{
-        createUser({variables :{input:{email: inputUser.email, name: inputUser.name, password:inputUser.password}}})
-    }
+    setInputUser(inputUser)
     console.log(inputUser)
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
+    fetchUser({variables:{email: inputUser.email}})
   };
 
   return (
@@ -106,11 +131,11 @@ export default function SignUpSide() {
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'green' }}>
-              <AssignmentIndIcon />
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Sign in
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -127,29 +152,39 @@ export default function SignUpSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="name"
-                label="User Name"
-                name="name"
-                autoComplete="name"
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
                 name="password"
                 label="Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              {errorMessage && (
+                <p className="error"> {errorMessage} </p>
+              )}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Sign In
               </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="/Albums" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
@@ -158,10 +193,3 @@ export default function SignUpSide() {
     </ThemeProvider>
   );
 }
-
-
-
-
-
-
-

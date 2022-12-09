@@ -6,8 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
@@ -17,7 +15,7 @@ import SearchPicture from './SearchPicture';
 import IconCheckboxes from './Heart'
 import { useNavigate } from 'react-router-dom';
 
-import { useQuery, useLazyQuery, gql, useMutation }from '@apollo/client';
+import { useQuery, gql, }from '@apollo/client';
 
 const QUERY_ALL_PICTURES=gql`
     query Getpictures{
