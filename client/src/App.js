@@ -7,6 +7,8 @@ import SignInSide from './Login';
 import SignUpSide from './SignUp';
 import HomePage from './Homepage/HomePage';
 import Albums from './Albums/Albums';
+import Account from './Account/Profile'
+
 
 function App() {
   const client =new ApolloClient({
@@ -27,6 +29,8 @@ function App() {
       <Routes>
         <Route path="/" element={<SignInSide />} />
         <Route path="/signup" element={<SignUpSide />} />
+        <Route path="/account" element={<Account />} />
+       
         {/* <Route path="/albums" element={<Albums />} /> */}
         {/* <Route path="/homepage" element={<HomePage />} /> */}
         {/* <Route path="about" element={<About/>} />

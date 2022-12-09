@@ -16,7 +16,7 @@ function Header(props) {
   return (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Button size="small">Account</Button>
+        <Button size="small" href='./Account/Profile.js'>Account</Button>
         <Typography
           component="h2"
           variant="h5"

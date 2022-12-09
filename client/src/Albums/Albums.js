@@ -14,6 +14,8 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from './AlbumsHeader';
 import SearchPicture from './SearchPicture';
+import IconCheckboxes from './Heart'
+
 import { useQuery, useLazyQuery, gql, useMutation }from '@apollo/client';
 
 const QUERY_ALL_PICTURES=gql`
@@ -37,6 +39,7 @@ function Copyright(props) {
       </Typography>
     );
   }
+  
 const cards1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const sections = [
   { title: 'Pictures', url: '#' },
@@ -70,47 +73,20 @@ export default function Albums() {
       </Container>
 
       <Container maxWidth="md" >
-
         <SearchPicture/> 
       </Container>
 
       <main>
         {/* Hero unit */}
-        <Box
+        {/* <Box
           sx={{
             bgcolor: 'background.paper',
             pt: 8,
             pb: 6,
           }}
         >
-          {/* <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h3"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Album layout
-            </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Something short and leading about the collection below—its contents,
-              the creator, etc. Make it short and sweet, but not too short so folks
-              don&apos;t simply skip over it entirely.
-            </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
-            </Stack>
-          </Container> */}
-        </Box>
+        </Box> */}
         <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
           <Grid container spacing={4}>
             {cards&&cards.map((card) => (
               <Grid item key={card.name} xs={12} sm={6} md={4}>
@@ -119,17 +95,15 @@ export default function Albums() {
                 >
                   <CardMedia
                     component="img"
-                    sx={{
-                      // 16:9
-                      pt: '56.25%',
-                    }}
-                    //image="https://source.unsplash.com/random"
+                    // sx={{
+                    //   pt: '56.25%',
+                    // }}
                     image={card.url}
-                    alt="random"
+                    alt={card.name}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {card.name}
                     </Typography>
                     <Typography>
                       This is a media card. You can use this section to describe the
@@ -137,8 +111,7 @@ export default function Albums() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
+                    <Button size="small"><IconCheckboxes/> </Button>
                   </CardActions>
                 </Card>
               </Grid>
