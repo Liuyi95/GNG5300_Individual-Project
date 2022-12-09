@@ -2,9 +2,7 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import { useQuery, useLazyQuery, gql, }from '@apollo/client';
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+
 
 
 const QUERY_ALL_USERS=gql`
