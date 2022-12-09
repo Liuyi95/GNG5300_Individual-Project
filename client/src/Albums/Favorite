@@ -1,0 +1,40 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
+export default function Favorite(props) {
+
+
+    React.useEffect(() => {
+        console.log(pictureData)
+        console.log(pictureData?.pictures)
+        pictureData&&setCards(pictureData.pictures)
+        console.log(cards)
+      }, [pictureData])
+    
+      useEffect(() => {
+        const loggedInUser = sessionStorage.getItem("user");
+        if (loggedInUser) {
+          const foundUser = JSON.parse(loggedInUser);
+          setUser(foundUser)
+        }
+        if(!loggedInUser){
+          navigate('/')
+        }
+    }, []);
+
+    const AddPicture2Favorite=(item)=>{
+        const existItem = cart.find(el => el.id === item.id);
+
+        if(existItem) {
+            existItem.amount+=1;
+            setCart([...cart]);
+            localStorage.setItem('cart', JSON.stringify([...cart]));
+        } else {
+            item.amount = 1;
+            setCart([...cart, item]);
+            localStorage.setItem('cart', JSON.stringify([...cart, item]));
+        }
+    };
+    }
+
+

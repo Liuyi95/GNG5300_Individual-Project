@@ -18,7 +18,7 @@ const typeDefs = gql`
     }
     type Query{
         users: [User!]!
-        user(id: ID!):User!
+        user(email: String!):User!
         pictures:[Picture!]!
         picture(name: String!): Picture!
     }
@@ -30,6 +30,12 @@ const typeDefs = gql`
         password: String!
     }
 
+    input CreatePictureInput{
+        id:ID
+        name:String!
+        url:String!
+    }
+
     input UpdateUsernameInput{
         id:ID!
         newUsername: String!
@@ -37,6 +43,7 @@ const typeDefs = gql`
 
     type Mutation{
         createUser(input: CreateUserInput!): User
+        createPicture(input: CreatePictureInput!): Picture
         updateUsername(input:UpdateUsernameInput!):User
         deleteUser(id: ID!):User
     }
