@@ -50,7 +50,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUpSide() {
-  const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME);
+  const[fetchUser,{data:userSearchData}]=useLazyQuery(GET_USER_BY_NAME);
   const [createUser]= useMutation(CREATE_USER_MUTATION);
 
   const handleSubmit = (event) => {
