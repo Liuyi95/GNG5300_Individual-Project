@@ -3,7 +3,6 @@ import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import MuiAppBar from '@mui/material/AppBar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
@@ -11,7 +10,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { mainListItems, secondaryListItems } from './listItems';
 import Deposits from './Deposits';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 
 const drawerWidth = 240;
@@ -46,10 +45,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function Account() {
-  const [open, setOpen] = React.useState(true);
+  const [open] = React.useState(true);
   const [user, setUser] = useState()
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     const loggedInUser = sessionStorage.getItem("user");
@@ -58,16 +57,16 @@ function Account() {
       setUser(foundUser)
     }
     if(!loggedInUser){
-      navigate('/')
+      // navigate('/Albums')
     }
     // if (loggedInUser) {
     //   const foundUser = JSON.parse(loggedInUser);
     //   setUser(foundUser);
     // }
   }, []);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+  // const toggleDrawer = () => {
+  //   setOpen(!open);
+  // };
 
   return (
     <ThemeProvider theme={mdTheme}>
