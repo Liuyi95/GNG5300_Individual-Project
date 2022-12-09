@@ -15,7 +15,7 @@ import SearchPicture from './SearchPicture';
 import IconCheckboxes from './Heart'
 import { useNavigate } from 'react-router-dom';
 
-import { useQuery, useLazyQuery, gql, useMutation }from '@apollo/client';
+import { useQuery, gql, }from '@apollo/client';
 
 const QUERY_ALL_PICTURES=gql`
     query Getpictures{
