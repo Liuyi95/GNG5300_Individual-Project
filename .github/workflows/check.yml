@@ -38,14 +38,14 @@ jobs:
     needs: build
     environment:
       name: 'Development'
-      url: ${{ steps.deploy-to-VisualCanada.outputs.https://visualcanada.azurewebsites.net }}
+      url: ${{ visualcanada.scm.azurewebsites.net:443}}
 
     steps:
 
     - name: 'Deploy to Azure WebApp'
-      id: deploy-to-webapp
-      uses: azure/webapps-deploy@v2
+      id: deploy-to-VisualCanada
+      uses: azure/VisualCanada-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
