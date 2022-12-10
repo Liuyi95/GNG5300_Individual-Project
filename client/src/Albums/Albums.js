@@ -20,6 +20,7 @@ import { useQuery, useLazyQuery, gql, useMutation }from '@apollo/client';
 const QUERY_ALL_PICTURES=gql`
     query Getpictures{
         pictures {
+            _id
             name
             url
         }
@@ -60,10 +61,7 @@ export default function Albums() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    console.log(pictureData)
-    console.log(pictureData?.pictures)
     pictureData&&setCards(pictureData.pictures)
-    console.log(cards)
   }, [pictureData])
 
   useEffect(() => {
@@ -75,10 +73,6 @@ export default function Albums() {
     if(!loggedInUser){
       navigate('/')
     }
-    // if (loggedInUser) {
-    //   const foundUser = JSON.parse(loggedInUser);
-    //   setUser(foundUser);
-    // }
   }, []);
   return (
     <ThemeProvider theme={theme}>
@@ -92,15 +86,6 @@ export default function Albums() {
       </Container>
 
       <main>
-        {/* Hero unit */}
-        {/* <Box
-          sx={{
-            bgcolor: 'background.paper',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-        </Box> */}
         <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
             {cards&&cards.map((card) => (
@@ -110,9 +95,6 @@ export default function Albums() {
                 >
                   <CardMedia
                     component="img"
-                    // sx={{
-                    //   pt: '56.25%',
-                    // }}
                     image={card.url}
                     alt={card.name}
                   />
@@ -126,7 +108,7 @@ export default function Albums() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small"><IconCheckboxes/> </Button>
+                    <Button size="small"><IconCheckboxes pictureId={card._id} user={user}/> </Button>
                   </CardActions>
                 </Card>
               </Grid>

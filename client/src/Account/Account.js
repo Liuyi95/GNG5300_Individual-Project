@@ -12,6 +12,8 @@ import Paper from '@mui/material/Paper';
 import { mainListItems, secondaryListItems } from './listItems';
 import Deposits from './Deposits';
 import { useNavigate } from 'react-router-dom';
+import FavoritePictures from "./FavoritePictures";
+import UploadButton from "./UploadPicture";
 
 
 const drawerWidth = 240;
@@ -77,10 +79,6 @@ function Account() {
     if(!loggedInUser){
       navigate('/')
     }
-    // if (loggedInUser) {
-    //   const foundUser = JSON.parse(loggedInUser);
-    //   setUser(foundUser);
-    // }
   }, []);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -123,8 +121,10 @@ function Account() {
                   <Deposits user={user} />
                 </Paper>
               </Grid>
-
+          
           </Container>
+          <UploadButton />
+          <FavoritePictures user={user}/>
         </Box>
       </Box>
     </ThemeProvider>

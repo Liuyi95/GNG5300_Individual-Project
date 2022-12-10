@@ -33,6 +33,10 @@ const resolvers={
         createPicture: async (_, args, { dataSources: { pictures } }) => {
             return pictures.createPicture(args)
         },
+        updateUserPicture:async (_, args, {dataSources:{users}})=>{
+            console.log(args)
+            return users.updateUserPicture(args)
+        }
         // createUser:(parent, args) => {
         //     const user =args.input;
         //     // console.log(user);
