@@ -5,13 +5,22 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
 function Sidebar(props) {
   const { description, social, title } = props;
 
   return (
-    <Grid item xs={12} md={4}>
-      <Paper elevation={0} sx={{ p: 2, bgcolor: 'grey.200' }}>
+    <Grid item xs={15} md={3}>
+      <Paper elevation={0} sx={{ p: 1, bgcolor: 'grey.200' }}>
+      <Card sx={{ maxWidth: 500 }}>
+      <CardMedia
+        component="img"
+        height="200"
+        image="/Liuyi Chen.jpg"
+        alt="Liuyi Chen"
+      />
+        </Card>
         <Typography variant="h6" gutterBottom>
           {title}
         </Typography>
@@ -33,7 +42,7 @@ function Sidebar(props) {
         <Link
           display="block"
           variant="body1"
-          href="#"
+          href="https://github.com/Liuyi95/GNG5300_Individual-Project.git"
           key={network.name}
           sx={{ mb: 0.5 }}
         >
@@ -44,6 +53,12 @@ function Sidebar(props) {
         </Link>
       ))}
     </Grid>
+    
+    
+
+        
+
+
   );
 }
 

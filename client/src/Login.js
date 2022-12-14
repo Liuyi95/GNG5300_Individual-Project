@@ -17,22 +17,17 @@ import { useNavigate } from 'react-router-dom';
 
 import './style.css'
 
-const GET_USER_BY_NAME=gql`
+const GET_USER_BY_EMAIL=gql`
 query getUser($email: String!){
     user(email: $email) {
+      _id
       name
       email
       password
+      favoritePicture
     }
   }
 `;
-
-// const bodyParser = require( 'body-parser');
-// const cookieParser = require('cookie-parser' ); 
-// const session = require('express-session');
-
-
-
 
 function Copyright(props) {
   return (
@@ -50,27 +45,15 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
-  const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME,{
+  const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_EMAIL,{
     onCompleted: (data) => {
-      // console.log(data)
-      // console.log(userSearchData)
     }
   });
 
-
-
-  // const [cookies, setCookie] = useCookies(['user']);
-  // const userCookie = cookies['user'];
-
   const [errorMessage, setErrorMessage] = useState('');
   const [inputUser, setInputUser]=useState('');
-  // const [email, setEmail] = useState(userCookie && userCookie.email ? userCookie.email : "");
-  // const [password, setPassword] = useState(userCookie && userCookie.password ? userCookie.password : "");
-
 
   React.useEffect(() => {
-    console.log(userSearchData)
-    console.log(inputUser)
     if(!inputUser){
       setErrorMessage('');
     }else{
@@ -99,7 +82,6 @@ export default function SignInSide() {
         password: data.get('password'),
     }
     setInputUser(inputUser)
-    console.log(inputUser)
     fetchUser({variables:{email: inputUser.email}})
   };
 

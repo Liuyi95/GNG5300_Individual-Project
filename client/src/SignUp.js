@@ -1,15 +1,11 @@
 
 import { useState, useCallback } from "react";
 import { useQuery, useLazyQuery, gql, useMutation, throwServerError }from '@apollo/client';
-
-
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -17,6 +13,7 @@ import Grid from '@mui/material/Grid';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 const GET_USER_BY_NAME=gql`
 query getUser($email: String!){
@@ -29,7 +26,7 @@ query getUser($email: String!){
 const CREATE_USER_MUTATION = gql`
     mutation CreateUser($input:CreateUserInput!){
         createUser(input:$input){
-        id
+        _id
         name
         email
         password
@@ -55,7 +52,9 @@ const theme = createTheme();
 export default function SignUpSide() {
   const[fetchUser,{data:userSearchData, error:userError}]=useLazyQuery(GET_USER_BY_NAME);
   const [createUser]= useMutation(CREATE_USER_MUTATION);
-
+  
+  
+  let navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -72,6 +71,7 @@ export default function SignUpSide() {
         createUser({variables :{input:{email: inputUser.email, name: inputUser.name, password:inputUser.password}}})
     }
     console.log(inputUser)
+    navigate('/Albums')
     // console.log({
     //   email: data.get('email'),
     //   password: data.get('password'),
@@ -109,7 +109,7 @@ export default function SignUpSide() {
             <Avatar sx={{ m: 1, bgcolor: 'green' }}>
               <AssignmentIndIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
+            <Typography component="h1" variant="h5" >
               Sign up
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>

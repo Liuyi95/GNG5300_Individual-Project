@@ -12,7 +12,7 @@ function Header(props) {
 
   return (
     <React.Fragment>
-      <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Toolbar sx={{ borderBottom: 2, borderColor: 'divider' }}>
         <Button size="small">Subscribe</Button>
         <Typography
           component="h2"
@@ -43,7 +43,7 @@ function Header(props) {
             key={section.title}
             variant="body2"
             href={section.url}
-            sx={{ p: 1, flexShrink: 0 }}
+            sx={{ p: 3, flexShrink: 0 }}
           >
             {section.title}
           </Link>

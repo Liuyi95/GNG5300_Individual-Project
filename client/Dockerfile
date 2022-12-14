@@ -1,6 +1,5 @@
 FROM node:16.17.1 as build
-ENV MONGODB_URI="mongodb+srv://Liuyi:950601@apolloserversetup.ie88wcb.mongodb.net/PictureUploadSystem?retryWrites=true&w=majority"
-
+ENV NODE_ENV=production
 WORKDIR /usr/src/app
 COPY ["package*.json", "./"]
 COPY . .
